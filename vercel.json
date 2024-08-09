@@ -1,16 +1,20 @@
 {
   "version": 2,
   "builds": [
-    { "src": "app.py", "use": "@vercel/python" }
+    {
+      "src": "app.py",
+      "use": "@vercel/python",
+      "config": {
+        "maxDuration": 60
+      }
+    }
   ],
   "routes": [
-    { "src": "/(.*)", "dest": "app.py" }
-  ],
-  "functions": {
-    "api/shorten": {
-      "maxDuration": 60
+    {
+      "src": "/(.*)",
+      "dest": "app.py"
     }
-  },
+  ],
   "env": {
     "MONGO_URI": "mongodb+srv://harahgaming37:3X#b9AxDjN!Jb5H@tools-app.j5whn.mongodb.net/?retryWrites=true&w=majority&appName=tools-app"
   }
