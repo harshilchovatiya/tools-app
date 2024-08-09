@@ -8,7 +8,6 @@ from PIL import Image
 from docx import Document
 import json
 from pymongo import MongoClient
-# from bson import ObjectId
 
 app = Flask(__name__)
 
