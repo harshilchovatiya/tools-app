@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Compressor</title>
+    <link rel="stylesheet" href="/static/image_compressor.css">
+</head>
+<body>
+    <h1>Image Compressor</h1>
+    <form id="compressor_form">
+        <label for="image">Select Image to Compress:</label>
+        <input type="file" id="image" name="image" accept="image/*" required>
+        <br>
+        <label for="quality">Select Compression Quality:</label>
+        <input type="range" id="quality" name="quality" min="10" max="90" value="20">
+        <span id="quality_value">20%</span>
+        <br>
+        <br>
+        <button type="button" onclick="compressImage()">Compress Image</button>
+    </form>
+    <div id="result"></div>
+    
+    <a id="download_button" style="display: none;">Download Image</a>
+    <button onclick="location.href='/'">Back to Dashboard</button>
+
+    <script src="/static/image_compressor.js"></script>
+</body>
+</html>

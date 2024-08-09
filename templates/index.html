@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tools Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f3f3f3;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .tool-box {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .tool-box button {
+            width: 100%;
+            background-color: #29a587;
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 4px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-bottom: 10px;
+        }
+        .tool-box button:hover {
+            background-color: #1c7c61;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Tools Dashboard</h1>
+        <div class="tool-box">
+            <button onclick="location.href='/qr_code'" aria-label="Go to QR Code Generator">QR Code Generator</button>
+            <button onclick="location.href='/url_shortener'" aria-label="Go to URL Shortener">URL Shortener</button>
+            <button onclick="location.href='/image_compressor'" aria-label="Go to Image Compressor">Image Compressor</button>
+            <button onclick="location.href='/image_upscaler'" aria-label="Go to Image Upscaler">Image Upscaler</button>
+            <button onclick="location.href='/file_converter'" aria-label="Go to File Converter">File Converter</button>
+        </div>
+    </div>
+</body>
+</html>

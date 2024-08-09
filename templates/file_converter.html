@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Converter</title>
+    <link rel="stylesheet" href="/static/file_converter.css">
+</head>
+
+<body>
+    <h1>File Converter</h1>
+    <form id="converter_form" enctype="multipart/form-data" onsubmit="convertFile(); return false;">
+        <input type="file" name="file" required>
+        <select name="file_type" required>
+            <option value="image">Image</option>
+            <option value="docx">DOCX</option>
+            <option value="json">JSON</option>
+        </select>
+        <select name="output_format" required>
+            <option value="pdf">PDF</option>
+            <option value="txt">TXT</option>
+        </select>
+        <button type="submit">Convert</button>
+    </form>
+    <div id="result"></div>
+
+
+    <p><strong>Disclaimer:</strong> This file converter supports converting between various file types, including:
+    <ul>
+        <li>Image to PDF</li>
+        <li>DOCX to TXT</li>
+        <li>JSON To Text</li>
+    </ul>
+    Please ensure that your files are correctly formatted for accurate conversion results.
+    </p>
+
+    <script src="/static/file_converter.js"></script>
+    <button onclick="location.href='/'">Back to Dashboard</button>
+</body>
+
+</html>

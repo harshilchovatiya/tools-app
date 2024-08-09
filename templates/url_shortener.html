@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL Shortener</title>
+    <link rel="stylesheet" href="/static/url_shortener.css">
+</head>
+<body>
+    <h1>URL Shortener</h1>
+    <form onsubmit="event.preventDefault(); shortenURL();">
+        <label for="long_url">Enter Long URL:</label>
+        <input type="text" id="long_url" name="long_url" placeholder="Enter the URL" required>
+        <button type="submit">Shorten URL</button>
+    </form>
+    <div id="result"></div>
+
+    <script src="/static/url_shortener.js"></script>
+    <button onclick="location.href='/'" class="back">Back to Dashboard</button>
+</body>
+</html>
