@@ -6,6 +6,11 @@
   "routes": [
     { "src": "/(.*)", "dest": "app.py" }
   ],
+  "functions": {
+    "api/shorten": {
+      "maxDuration": 60
+    }
+  },
   "env": {
     "MONGO_URI": "mongodb+srv://harahgaming37:3X#b9AxDjN!Jb5H@tools-app.j5whn.mongodb.net/?retryWrites=true&w=majority&appName=tools-app"
   }
