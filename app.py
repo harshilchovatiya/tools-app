@@ -231,4 +231,4 @@ def get_long_url(short_url):
         return row[0] if row else None
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
