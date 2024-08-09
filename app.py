@@ -1,6 +1,5 @@
 from flask import Flask, request, jsonify, redirect, render_template, send_file
 import hashlib
-import sqlite3
 import qrcode
 from io import BytesIO
 import base64
@@ -8,16 +7,15 @@ import io
 from PIL import Image
 from docx import Document
 import json
+from pymongo import MongoClient
+# from bson import ObjectId
 
 app = Flask(__name__)
 
-# Initialize SQLite database
-def init_db():
-    with sqlite3.connect('url_shortener.db') as conn:
-        conn.execute('CREATE TABLE IF NOT EXISTS urls (short_url TEXT PRIMARY KEY, long_url TEXT)')
-        conn.commit()
-
-init_db()
+# Initialize MongoDB client
+client = MongoClient('mongodb+srv://harahgaming37:3X#b9AxDjN!Jb5H@tools-app.j5whn.mongodb.net/?retryWrites=true&w=majority&appName=tools-app')
+db = client['tools_db']
+urls_collection = db['urls']
 
 @app.route('/')
 def index():
@@ -220,15 +218,15 @@ def generate_short_url(long_url):
     return short_hash
 
 def store_url(short_url, long_url):
-    with sqlite3.connect('url_shortener.db') as conn:
-        conn.execute('INSERT OR REPLACE INTO urls (short_url, long_url) VALUES (?, ?)', (short_url, long_url))
-        conn.commit()
+    urls_collection.update_one(
+        {'short_url': short_url},
+        {'$set': {'long_url': long_url}},
+        upsert=True
+    )
 
 def get_long_url(short_url):
-    with sqlite3.connect('url_shortener.db') as conn:
-        cursor = conn.execute('SELECT long_url FROM urls WHERE short_url = ?', (short_url,))
-        row = cursor.fetchone()
-        return row[0] if row else None
+    url_data = urls_collection.find_one({'short_url': short_url})
+    return url_data['long_url'] if url_data else None
 
 if __name__ == '__main__':
     app.run()
