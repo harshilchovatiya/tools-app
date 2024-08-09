@@ -8,11 +8,13 @@ from PIL import Image
 from docx import Document
 import json
 from pymongo import MongoClient
+import os
 
 app = Flask(__name__)
 
 # Initialize MongoDB client
-client = MongoClient('mongodb+srv://harahgaming37:3X#b9AxDjN!Jb5H@tools-app.j5whn.mongodb.net/?retryWrites=true&w=majority&appName=tools-app')
+mongo_uri = os.getenv('MONGO_URI')
+client = MongoClient(mongo_uri)
 db = client['tools_db']
 urls_collection = db['urls']
 
