@@ -9,14 +9,24 @@ from docx import Document
 import json
 from pymongo import MongoClient
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 app = Flask(__name__)
 
-# Initialize MongoDB client
+# Load MongoDB URI from environment variable
 mongo_uri = os.getenv('MONGO_URI')
-client = MongoClient(mongo_uri)
-db = client['tools_db']
-urls_collection = db['urls']
+
+print(mongo_uri)
+try:
+    client = MongoClient(mongo_uri)
+    db = client['tools_db']
+    urls_collection = db['urls']
+    print("MongoDB connection successful")
+except Exception as e:
+    print(f"Error connecting to MongoDB: {e}")
+
 
 @app.route('/')
 def index():
@@ -91,7 +101,7 @@ def redirect_to_long_url(short_url):
 
 # Image Compressor API
 @app.route('/api/image_compressor', methods=['POST'])
-def image_gen_compressor():
+def image_compressor_api():
     if 'image' not in request.files:
         return jsonify({'error': 'No image file provided'}), 400
     
@@ -177,10 +187,6 @@ def convert_file():
     except Exception as e:
         return jsonify({'error': f'Error during conversion: {str(e)}'}), 500
 
-
-
-
-
 def convert_image_to_pdf(file):
     try:
         image = Image.open(file)
@@ -226,8 +232,8 @@ def store_url(short_url, long_url):
     )
 
 def get_long_url(short_url):
-    url_data = urls_collection.find_one({'short_url': short_url})
-    return url_data['long_url'] if url_data else None
+    result = urls_collection.find_one({'short_url': short_url})
+    return result['long_url'] if result else None
 
 if __name__ == '__main__':
     app.run()
