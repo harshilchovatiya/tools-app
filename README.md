@@ -1,7 +1,6 @@
-
 # Tools App
 
-Welcome to the Tools App! This application provides a suite of useful tools for image processing, file conversion, URL shortening, and QR code generation. 
+Welcome to the Tools App! This application provides a suite of useful tools for image processing, file conversion, URL shortening, and QR code generation.
 
 ## Overview
 
@@ -14,6 +13,9 @@ The Tools App includes the following features:
    - **Image to PDF**
    - **DOCX to TXT**
    - **JSON to TXT**
+6. **Image to Text Converter**: Converts images to text using OCR.
+7. **Speedtest**: Measures the speed of your internet connection.
+8. **Unit Converter**: Converts between different units of measurement.
 
 ## Features
 
@@ -22,6 +24,9 @@ The Tools App includes the following features:
 - **QR Code Generator**: Enter text to generate a QR code, view it, and download the QR code image.
 - **URL Shortener**: Shorten long URLs and get a short link that redirects to the original URL.
 - **File Converter**: Convert images to PDFs, DOCX files to text, and JSON files to text.
+- **Image to Text Converter**: Upload an image and receive the extracted text.
+- **Speedtest**: Measure your internet connection's download and upload speeds.
+- **Unit Converter**: Convert between units like length, weight, and temperature.
 
 ## API Documentation
 
@@ -63,6 +68,26 @@ The Tools App includes the following features:
 - **Method**: `POST`
 - **Request**: Form data with `file`, `file_type`, and `output_format`.
 - **Response**: Converted file (PDF or TXT) based on input and output format.
+
+### **Image to Text API**
+
+- **Endpoint**: `/api/image_to_text`
+- **Method**: `POST`
+- **Request**: Form data with `image` file.
+- **Response**: JSON containing the extracted text.
+
+### **Speedtest API**
+
+- **Endpoint**: `/api/speedtest`
+- **Method**: `GET`
+- **Response**: JSON containing download and upload speeds.
+
+### **Unit Converter API**
+
+- **Endpoint**: `/api/unit_converter`
+- **Method**: `POST`
+- **Request**: JSON payload with `value`, `from_unit`, and `to_unit` fields.
+- **Response**: JSON containing the converted value.
 
 ## API Reference
 
@@ -130,6 +155,38 @@ The Tools App includes the following features:
 | `file_type`   | `string` | **Required**. Type of the file to convert (`image`, `docx`, `json`) |
 | `output_format` | `string` | **Required**. Desired output format (`pdf` or `txt`) |
 
+### **Image to Text**
+
+```http
+  POST /api/image_to_text
+```
+
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `image`   | `file`   | **Required**. Image file to extract text from |
+
+### **Speedtest**
+
+```http
+  GET /api/speedtest
+```
+
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `None`    | `None`   | Returns download and upload speeds |
+
+### **Unit Converter**
+
+```http
+  POST /api/unit_converter
+```
+
+| Parameter | Type     | Description                |
+| :-------- | :------- | :------------------------- |
+| `value`   | `float`  | **Required**. Value to convert |
+| `from_unit` | `string` | **Required**. Unit of the value being converted |
+| `to_unit` | `string` | **Required**. Unit to convert to |
+
 ## Demo
 
 You can try out the app by visiting the following URLs:
@@ -138,6 +195,9 @@ You can try out the app by visiting the following URLs:
 - [QR Code Generator](http://localhost:5000/qr_code)
 - [URL Shortener](http://localhost:5000/url_shortener)
 - [File Converter](http://localhost:5000/file_converter)
+- [Image to Text Converter](http://localhost:5000/image_to_text)
+- [Speedtest](http://localhost:5000/speedtest)
+- [Unit Converter](http://localhost:5000/unit_converter)
 
 ## Installation
 
