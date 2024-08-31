@@ -5,7 +5,7 @@
       "src": "app.py",
       "use": "@vercel/python",
       "config": {
-        "maxDuration": 260
+        "maxLambdaSize": "50mb"
       }
     }
   ],
@@ -14,8 +14,5 @@
       "src": "/(.*)",
       "dest": "app.py"
     }
-  ],
-  "env": {
-    "MONGO_URI": "mongodb+srv://harahgaming37:3X#b9AxDjN!Jb5H@tools-app.j5whn.mongodb.net/?retryWrites=true&w=majority&appName=tools-app"
-  }
+  ]
 }
