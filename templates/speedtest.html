@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Internet Speed Test</title>
+    <link rel="stylesheet" href="/static/css/sppedtest.css">
+</head>
+
+<body>
+    <h1>Internet Speed Test</h1>
+    <button id="test-speed">Test Speed</button>
+    <div id="speedometer" style="display: none;">
+        <div id="download-speed" class="meter">Download: <span id="download">0</span> Mbps</div>
+        <div id="upload-speed" class="meter">Upload: <span id="upload">0</span> Mbps</div>
+        <div id="ping" class="meter">Ping: <span id="ping">0</span> ms</div>
+    </div>
+    <div id="spinner" style="display: none;">Testing...</div>
+    <br> <br><br><br><br>
+    <button onclick="location.href='/'">Back to Dashboard</button>
+
+    <script>
+        document.getElementById('test-speed').addEventListener('click', function () {
+            document.getElementById('spinner').style.display = 'block';
+            document.getElementById('speedometer').style.display = 'none';
+
+            const fetchData = () => {
+                fetch('/api/speedtest/test')
+                    .then(response => response.json())
+                    .then(data => {
+                        document.getElementById('spinner').style.display = 'none';
+                        document.getElementById('speedometer').style.display = 'block';
+                        document.getElementById('download').innerText = data.data.download_speed.toFixed(2);
+                        document.getElementById('upload').innerText = data.data.upload_speed.toFixed(2);
+                        document.getElementById('ping').innerText = data.data.ping.toFixed(2);
+                    })
+                    .catch(error => {
+                        console.error('Error fetching speed data:', error);
+                    });
+            };
+
+            // Start fetching data periodically (e.g., every 5 seconds)
+            fetchData();
+            // setInterval(fetchData, 5000);
+        });
+
+    </script>
+</body>
+
+</html>
