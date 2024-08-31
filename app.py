@@ -1,6 +1,6 @@
 from flask import Flask
 from flask_cors import CORS
-from routes import main_routes_bp, qr_code_bp, url_shortener_bp, image_compressor_bp, image_upscaler_bp, file_converter_bp, image_to_text_bp, speedtest_bp
+from routes import main_routes_bp, qr_code_bp, url_shortener_bp, image_compressor_bp, image_upscaler_bp, file_converter_bp, image_to_text_bp, speedtest_bp, unit_converter_bp
 
 def create_app():
     app = Flask(__name__)
@@ -13,6 +13,8 @@ def create_app():
     app.register_blueprint(file_converter_bp)
     app.register_blueprint(image_to_text_bp)
     app.register_blueprint(speedtest_bp)
+    app.register_blueprint(unit_converter_bp)
+
 
 
     return app

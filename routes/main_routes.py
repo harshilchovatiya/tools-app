@@ -33,3 +33,7 @@ def image_to_text_page():
 @bp.route('/speedtest', methods=['GET'])
 def view_speedtest():
     return render_template('speedtest.html')
+
+@bp.route('/unit_converter', methods=['GET'])
+def unit_converter():
+    return render_template('unit_converter.html')

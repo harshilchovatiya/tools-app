@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit Converter</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Unit Converter</h1>
+    <form id="converter-form">
+        <label for="category">Category:</label>
+        <select id="category" name="category">
+            <option value="area">Area</option>
+            <option value="length">Length</option>
+            <option value="temperature">Temperature</option>
+            <option value="volume">Volume</option>
+            <option value="mass">Mass</option>
+            <option value="data">Data</option>
+            <option value="speed">Speed</option>
+            <option value="time">Time</option>
+        </select>
+
+        <label for="value">Value:</label>
+        <input type="number" id="value" name="value" step="any">
+
+        <label for="from_unit">From Unit:</label>
+        <input type="text" id="from_unit" name="from_unit">
+
+        <label for="to_unit">To Unit:</label>
+        <input type="text" id="to_unit" name="to_unit">
+
+        <button type="submit">Convert</button>
+    </form>
+
+    <div id="result"></div>
+
+    <script>
+        document.getElementById('converter-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const category = document.getElementById('category').value;
+            const value = document.getElementById('value').value;
+            const fromUnit = document.getElementById('from_unit').value;
+            const toUnit = document.getElementById('to_unit').value;
+
+            const response = await fetch('/api/unit_converter/convert', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    category,
+                    value,
+                    from_unit: fromUnit,
+                    to_unit: toUnit
+                })
+            });
+
+            const data = await response.json();
+            document.getElementById('result').innerText = `Result: ${data.result}`;
+        });
+    </script>
+</body>
+</html>
