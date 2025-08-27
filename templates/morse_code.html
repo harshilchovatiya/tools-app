@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Morse Code Translator</title>
+    <link rel="stylesheet" href="/static/css/morse_code.css">
+</head>
+<body>
+    <h1>Morse Code Translator</h1>
+    <form id="translator-form">
+        <label for="text-input">Text to Morse Code:</label>
+        <input type="text" id="text-input" name="text" placeholder="Enter text">
+        <button type="button" onclick="translateText()">Translate</button>
+        <br><br>
+        <label for="morse-input">Morse Code to Text:</label>
+        <input type="text" id="morse-input" name="morse_code" placeholder="Enter Morse code">
+        <button type="button" onclick="translateMorse()">Decode</button>
+    </form>
+    <h2>Result:</h2>
+    <p id="result"></p>
+
+
+    <br>
+    <button onclick="location.href='/'" class="back">Back to Dashboard</button>
+
+    <script>
+        async function translateText() {
+            const text = document.getElementById('text-input').value;
+            const response = await fetch('/api/morse_code', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({text: text})
+            });
+            const data = await response.json();
+            document.getElementById('result').textContent = data.result;
+        }
+
+        async function translateMorse() {
+            const morseCode = document.getElementById('morse-input').value;
+            const response = await fetch('/api/morse_code', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({morse_code: morseCode})
+            });
+            const data = await response.json();
+            document.getElementById('result').textContent = data.result;
+        }
+    </script>
+</body>
+</html>

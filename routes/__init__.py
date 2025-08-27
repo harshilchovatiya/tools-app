@@ -7,3 +7,5 @@ from .file_converter_routes import bp as file_converter_bp
 from .image_to_text_routes import bp as image_to_text_bp
 from .speedtest_routes import bp as speedtest_bp
 from .unit_converter_routes import bp as unit_converter_bp
+from .morse_code_routes import bp as morse_code_bp
+from .color_code_routes import bp as color_code_bp

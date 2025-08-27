@@ -37,3 +37,11 @@ def view_speedtest():
 @bp.route('/unit_converter', methods=['GET'])
 def unit_converter():
     return render_template('unit_converter.html')
+
+@bp.route('/morse_code', methods=['GET'])
+def morse_code_converter():
+    return render_template('morse_code.html')
+
+@bp.route('/color_code', methods=['GET'])
+def color_code_converter():
+    return render_template('color_code.html')

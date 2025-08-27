@@ -1,0 +1,57 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Code Converter</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/color_code.css') }}">
+</head>
+<body>
+    <h1>Color Code Converter</h1>
+    <form id="color-code-form">
+        <label for="color-code">Color Code:</label>
+        <input type="text" id="color-code" name="color_code" placeholder="Enter color code">
+        
+        <label for="input-format">Input Format:</label>
+        <select id="input-format" name="input_format">
+            <option value="hex">HEX</option>
+            <option value="rgb">RGB</option>
+            <option value="hsl">HSL</option>
+            <option value="cmyk">CMYK</option>
+            <option value="hsv">HSV</option>
+        </select>
+        
+        <label for="output-format">Output Format:</label>
+        <select id="output-format" name="output_format">
+            <option value="hex">HEX</option>
+            <option value="rgb">RGB</option>
+            <option value="hsl">HSL</option>
+            <option value="cmyk">CMYK</option>
+            <option value="hsv">HSV</option>
+        </select>
+        
+        <button type="button" onclick="convertColorCode()">Convert</button>
+    </form>
+    
+    <div id="result">
+        <h2>Result:</h2>
+        <p id="color-result"></p>
+    </div>
+
+    <script>
+        async function convertColorCode() {
+            const colorCode = document.getElementById('color-code').value;
+            const inputFormat = document.getElementById('input-format').value;
+            const outputFormat = document.getElementById('output-format').value;
+            const response = await fetch('/api/color_code', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({color_code: colorCode, input_format: inputFormat, output_format: outputFormat})
+            });
+            const data = await response.json();
+            document.getElementById('color-result').textContent = data.result;
+        }
+    </script>
+</body>
+</html>
